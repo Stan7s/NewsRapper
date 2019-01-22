@@ -5,9 +5,10 @@ import re
 import jieba
 import pypinyin
 import math
+import numpy as np
 import matplotlib.pyplot as plt
 
-resentencesp = re.compile('[,:，﹒﹔﹖﹗．；。！？"’”："‘“—]')
+resentencesp = re.compile('[ ,:，﹒﹔﹖﹗．；。！？"’”："‘“—]')
 
 
 # https://zouhualong.oschina.io/pages/blog/python/Python-%E6%95%B0%E5%AD%97%E8%BD%AC%E6%B1%89%E5%AD%97
@@ -197,12 +198,15 @@ def is_alpha(s):
 
 
 class Zh_Sent(object):
-    def __init__(self, str, seg_list, pinyin_list, yunmu_list, tune_list):
+    def __init__(self, str, seg_list, pinyin_list, yunmu_list, tone_list):
         self.str = str
         self.seg_list = seg_list
         self.pinyin_list = pinyin_list
         self.yunmu_list = yunmu_list
-        self.tune_list = tune_list
+        self.tone_list = tone_list
+        self.length = 0
+        for seg in self.seg_list:
+            self.length += len(seg)
 
     def get_last_yunmu(self):
         return self.yunmu_list[-1][-1]
@@ -211,19 +215,58 @@ class Zh_Sent(object):
         return self.pinyin_list[-1][-1]
 
     def get_last_tone(self):
-        return self.tune_list[-1][-1]
+        return self.tone_list[-1][-1]
+
+
+# https://blog.csdn.net/XX_123_1_RJ/article/details/80718461
+def calc_edit_distance(s1, s2):
+    '''
+    计算s1和s2之间的编辑距离
+    :param s1:
+    :param s2:
+    :return:
+    '''
+    m, n = len(s1), len(s2)
+    if m == 0: return n
+    if n == 0: return m
+    dp = [[0] * (n + 1) for _ in range(m + 1)]  # 初始化dp和边界
+    for i in range(1, m + 1): dp[i][0] = i
+    for j in range(1, n + 1): dp[0][j] = j
+    for i in range(1, m + 1):  # 计算dp
+        for j in range(1, n + 1):
+            if s1[i - 1] == s2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1]
+            else:
+                dp[i][j] = min(dp[i - 1][j - 1] + 1, dp[i][j - 1] + 1, dp[i - 1][j] + 1)
+    return dp[m][n]
 
 
 def compare_sentences(sentences):
+    '''
+    计算两句话的相似度
+    :param sentences:
+    :return:
+    '''
     n = len(sentences)
+    length_similarities = [] # 长度接近程度
     tail_similarities = []  # 最后一个字押韵的程度
-    total_similarities = []  # 整体相似度
+    total_similarities = []  # 节奏相似度
+    edit_distance = []
     for i in range(n):
+        length_similarities.append([])
         tail_similarities.append([])
         total_similarities.append([])
+        edit_distance.append([])
         for j in range(n):
             # 计算这两个句子的相似度
-            # 最后一个字？
+            # 编辑距离
+            edit_distance[-1].append(calc_edit_distance(sentences[i].str, sentences[j].str))
+            # 长度的相似度？
+            l1 = sentences[i].length
+            l2 = sentences[j].length
+            m = min(l1, l2)
+            length_similarities[-1].append((l1 + l2 - 2*m) / (l1 + l2))
+            # 计算最后一个字的相似度？
             if sentences[i].get_last_pinyin() == sentences[j].get_last_pinyin():
                 tail = 1.0
             elif sentences[i].get_last_yunmu() == sentences[j].get_last_yunmu():
@@ -265,10 +308,72 @@ def compare_sentences(sentences):
                 total = max(cnt, total)
             total_similarities[-1].append(total * 2 / (len(sentences[i].seg_list) + len(sentences[j].seg_list)))
 
-    return tail_similarities, total_similarities
+    return np.array(edit_distance), np.array(length_similarities), np.array(tail_similarities), np.array(total_similarities)
+
+
+def find_path(graph, threshold):
+    n = len(graph)
+    f = np.zeros(n, dtype=np.int)
+    last = np.zeros(n, dtype=np.int)
+    f[0] = 1
+    last[0] = -1
+    maxlen = 0
+    ans = -1
+    for i in range(1, n):
+        f[i] = 1
+        for j in range(0, i):
+            if f[j] + 1 > f[i] and graph[i, j] >= threshold:
+                last[i] = j
+                f[i] = f[j] + 1
+        if f[i] > maxlen:
+            maxlen = f[i]
+            ans = i
+    path = []
+    while not ans == -1:
+        path.append(ans)
+        ans = last[ans]
+    path.reverse()
+    return path
+
+
+# 把一个过长的句子分成几段
+def cut_sentences(sentence, force=-1):
+    if sentence.length <= 12 and force == -1:
+        return [sentence]
+    sent_list = []
+    seg_list = []
+    pinyin_list = []
+    yunmu_list = []
+    tone_list = []
+    length = 0
+    n = len(sentence.seg_list)
+    # print('/'.join(sentence.seg_list))
+    for i in range(n + 1):
+        # print(length)
+        if i == n or (force == -1 and length >= 6 or not force == -1 and length >= force):
+            if force == -1 and length >= 6 or not force == -1 and length == force:
+                sent_list.append(Zh_Sent(''.join(seg_list), seg_list, pinyin_list, yunmu_list, tone_list))
+            seg_list = []
+            pinyin_list = []
+            yunmu_list = []
+            tone_list = []
+            length = 0
+            if i == n:
+                break
+        length += len(sentence.seg_list[i])
+        seg_list.append(sentence.seg_list[i])
+        pinyin_list.append(sentence.pinyin_list[i])
+        yunmu_list.append(sentence.yunmu_list[i])
+        tone_list.append(sentence.tone_list)
+    return sent_list
 
 
 def split_article(article):
+    '''
+    处理一整篇文章
+    :param article: 文章
+    :return:
+    '''
     slist = split_sentence(article)
     print('句子（分句）总数：', len(slist))
 
@@ -276,6 +381,8 @@ def split_article(article):
     for s in slist:
         s = s.strip()
         if len(s) == 0:  # patch for empty
+            continue
+        if len(s) < 5:  # 删除词数太少的句子
             continue
         seg_list = jieba.lcut(s)  # list cut
         if len(seg_list) == 0:  # patch for empty
@@ -319,30 +426,51 @@ def split_article(article):
         # print(str(pinyin_list))
         # print(str(yunmu_list))
         # print(str(tone_list))
-        sentences.append(Zh_Sent(s, seg_list2, pinyin_list, yunmu_list, tone_list))
+        # 把过长的句子拆开
+        sent = cut_sentences(Zh_Sent(s, seg_list2, pinyin_list, yunmu_list, tone_list), force=args.force_same)
+        sentences += sent
 
-    # 计算句子的相似度并打印
-    tail_similarities, total_similarities = compare_sentences(sentences)
     for i in range(len(sentences)):
         print("sentence %d: %s" % (i, '/'.join(sentences[i].seg_list)))
 
+    # 计算句子的相似度
+    edit_distance, length_similarities, tail_similarities, total_similarities = compare_sentences(sentences)
+    # edit distance
+    too_similiar_mask = np.greater(edit_distance, 1).astype(np.float)
+    # 值是随便取的
+    similarities = 0.5 * length_similarities + 0.4 * tail_similarities + 0.1 * total_similarities
+    similarities = np.multiply(similarities, too_similiar_mask)
+
     # 可视化
-    img = plt.imshow(total_similarities, interpolation='nearest', cmap='gray', origin="lower")
+    img = plt.imshow(similarities, interpolation='nearest', cmap='gray', origin="lower")
     # make a color bar
     plt.colorbar(img, cmap='gray')
     plt.show()
 
-    # for i in range(len(sentences)):
-    #     print(str(total_similarities[i]))
-        # for j in range(i+1, len(sentences)):
-        #     print('(%d, %d) back similarity: %f' % (i, j, tail_similarities[i][j]))
-        #     print('(%d, %d) total similarity: %f' % (i, j, total_similarities[i][j]))
+    # 二分答案 + DP找总长度大于20的句子
+    l = 0.0
+    r = 1.0
+    while r - l > 1e-6:
+        m = (l + r) / 2.0
+        path = find_path(similarities, m)
+        if len(path) >= 20:
+            l = m
+        else:
+            r = m
+    print('最大相似度：', m)
+    print(str(path))
+    selected = []
+    for i in path:
+        selected.append(''.join(sentences[i].seg_list))
+    return selected
 
 
 parser = argparse.ArgumentParser(description='Process a document')
 parser.add_argument('--filename', type=str, help='Chinese utf8 file name')
+parser.add_argument('--force_same', type=int, default=-1, help='Force each segment to have same length')
 args = parser.parse_args()
 with open(args.filename, encoding="utf8") as f:
     article = f.read()
     # print(article)
-    split_article(article)
+    selected = split_article(article)
+    print('\n'.join(selected))
