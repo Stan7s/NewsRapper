@@ -1,3 +1,4 @@
 pandas
 pypinyin
 jieba
+matplotlib
