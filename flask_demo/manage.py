@@ -1,5 +1,7 @@
 import os
 from flask import Flask, render_template, flash, request, redirect, url_for, send_from_directory,session
+import textrank
+
 
 app = Flask(__name__)
 
@@ -8,10 +10,12 @@ app = Flask(__name__)
 def index():
     audio_id = "default.mp3"  # 音频文件名
     if request.method == 'POST':
-        news_content = request.form['news_content']
-        print(news_content)
-        # audio_id = generate_audio()
-        audio_id = news_content
+        original_news = request.form['news_content']
+        print(original_news)
+        summary = textrank.summarize(original_news)
+        print(summary)
+        # lyric = generate_lyric(summary)
+        # audio_id = generate_audio(lyric)
         return render_template('index.html', message=audio_id)
     return render_template('index.html', message=audio_id)
 
@@ -19,6 +23,7 @@ def index():
 @app.route('/audio')
 def audio():
     return render_template('test_audio.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

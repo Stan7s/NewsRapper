@@ -30,16 +30,18 @@
     <div id="content">
         <div class="row">
             <div class="col-xs-8 col-sm-6" id="step1">
-                STEP1: Enter news content
+                <h5>STEP1: Enter news content</h5>
                 <form name="news_form" method="POST">
                     <textarea class="form-control" id="deblock_udid" name="news_content" rows="8" style="min-width: 50%"></textarea>
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <div class="btn">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-4 col-sm-6" id="step2">
-                STEP2: Get your Rap Music！
+                <h5>STEP2: Get your Rap Music！</h5>
                 <div id="wrapper">
                     <audio preload="auto" controls>
                         <source src="{{ url_for('static', filename='audio/' + message) }}">
@@ -48,6 +50,13 @@
                     <script src="{{ url_for('static', filename='js/audioplayer.js') }}"></script>
                     <script>$( function() { $( 'audio' ).audioPlayer(); } );</script>
                 </div>
+            </div>
+        </div>
+        <div>
+            <h5>Lyrics</h5>
+            <div id="lyric_content">
+                <p>我是一只猫</p>
+                <p>喵喵喵喵喵</p>
             </div>
         </div>
     </div>

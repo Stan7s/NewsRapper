@@ -12,7 +12,7 @@ class SummaryTxt:
     def __init__(self, stopwordspath):
         self.N = 100
         self.CLUSTER_THRESHOLD = 5
-        self.TOP_SENTENCES = 5
+        self.TOP_SENTENCES = 3
         self.stopwrods = {}
         if os.path.exists(stopwordspath):
             stoplist = [line.strip() for line in codecs.open(stopwordspath, 'r', encoding='utf8').readlines()]
@@ -82,7 +82,6 @@ class SummaryTxt:
         for (sent_idx, score) in scored_sentences:
             if score > (avg + 0.5 * std):
                 summarySentences.append(sentences[sent_idx])
-                print(sentences[sent_idx])
         return summarySentences
 
     def summaryTopNtxt(self,text):
@@ -102,21 +101,21 @@ class SummaryTxt:
         return summarySentences
 
 
-def summarize(text_path):
-    obj = SummaryTxt('stopwords.txt')
+def summarize(text):
+    obj = SummaryTxt('static/text/stopwords.txt')
     # with open(text_path, 'r') as f:
-    with open(text_path, 'r', encoding='utf-8') as f:
-        text = f.read()
+    # with open(text_path, 'r', encoding='utf-8') as f:
+    #     text = f.read()
         # text = text.decode('utf-8')
-    print(text)
-    print("----")
     obj.summaryScoredtxt(text)
     print("----")
     summary = obj.summaryTopNtxt(text)
-    for sentence in summary:
-        print(sentence)
+    summary_path = 'static/text/summary.txt'
+    with open(summary_path, 'w', encoding='utf-8') as f:
+        for sentence in summary:
+            f.write(sentence)
     return summary
 
 
 if __name__ == '__main__':
-    summarize('news.txt')
+    summarize('test')
