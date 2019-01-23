@@ -6,7 +6,14 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    audio_id = "default.mp3"  # 音频文件名
+    if request.method == 'POST':
+        news_content = request.form['news_content']
+        print(news_content)
+        # audio_id = generate_audio()
+        audio_id = news_content
+        return render_template('index.html', message=audio_id)
+    return render_template('index.html', message=audio_id)
 
 
 @app.route('/audio')

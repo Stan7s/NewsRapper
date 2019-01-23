@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab3b834f-eb9f-4c10-b152-18ce0c488ed3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/flask_demo/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/crawler/find_song.py" beforeDir="false" afterPath="$PROJECT_DIR$/crawler/find_song.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_demo/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_demo/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_demo/static/audio/BlueDucks_FourFlossFiveSix.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_demo/static/audio/BlueDucks_FourFlossFiveSix.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_demo/static/audio/BlueDucks_FourFlossFiveSix.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_demo/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/flask_demo/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_demo/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_demo/templates/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,53 +19,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="manage.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flask_demo/manage.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flask_demo/templates/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="30" column="25" lean-forward="true" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-              <folding>
-                <element signature="n#style#0;n#textarea#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_audio.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flask_demo/templates/test_audio.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="9" selection-start-line="9" selection-end-line="16" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="find_song.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/crawler/find_song.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+            <state relative-caret-position="1102">
+              <caret line="60" column="26" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/flask_demo/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="24" column="13" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="13" />
+              <folding>
+                <element signature="n#style#0;n#textarea#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flask_demo/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+            <state relative-caret-position="266">
+              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manage.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flask_demo/manage.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -77,6 +70,11 @@
         <option value="HTML File" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>test</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -92,17 +90,17 @@
         <option value="$PROJECT_DIR$/flask_demo/index.py" />
         <option value="$PROJECT_DIR$/flask_demo/index.html" />
         <option value="$PROJECT_DIR$/flask_demo/static/index.css" />
-        <option value="$PROJECT_DIR$/flask_demo/manage.py" />
         <option value="$PROJECT_DIR$/crawler/find_song.py" />
         <option value="$PROJECT_DIR$/flask_demo/templates/test_audio.html" />
-        <option value="$PROJECT_DIR$/flask_demo/templates/index.html" />
         <option value="$PROJECT_DIR$/flask_demo/static/css/style.css" />
+        <option value="$PROJECT_DIR$/flask_demo/manage.py" />
+        <option value="$PROJECT_DIR$/flask_demo/templates/index.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="951" />
-    <option name="width" value="978" />
+    <option name="width" value="960" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -113,6 +111,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -147,20 +146,12 @@
               <item name="Lianbo2Rap" type="b2602c69:ProjectViewProjectNode" />
               <item name="Lianbo2Rap" type="462c0819:PsiDirectoryNode" />
               <item name="flask_demo" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Lianbo2Rap" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Lianbo2Rap" type="462c0819:PsiDirectoryNode" />
-              <item name="flask_demo" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -187,7 +178,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.find_song">
+  <component name="RunManager" selected="Python.manage">
     <configuration name="data_convert_example" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Lianbo2Rap" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -287,8 +278,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.find_song" />
         <item itemvalue="Python.manage" />
+        <item itemvalue="Python.find_song" />
         <item itemvalue="Python.data_convert_example" />
         <item itemvalue="Python.sum_textrank" />
         <item itemvalue="Python.data_filter" />
@@ -312,7 +303,7 @@
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1961691" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12285337" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32357043" />
@@ -323,187 +314,111 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39888424" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32357043" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1961691" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39888424" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32914925" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12285337" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32496512" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39888424" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
     </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data_filter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="12" column="59" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4389">
-          <caret line="236" selection-start-line="236" selection-end-line="237" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1007">
-          <caret line="60" selection-start-line="60" selection-end-line="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crawler/find_song.py" />
-    <entry file="file://$PROJECT_DIR$/sum_textrank.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/textsum/data_convert_example.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1102">
-          <caret line="62" lean-forward="true" selection-start-line="62" selection-end-line="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data_filter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="12" column="59" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4484">
-          <caret line="236" selection-start-line="236" selection-end-line="237" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1007">
-          <caret line="60" selection-start-line="60" selection-end-line="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/crawler/find_song.py" />
-    <entry file="file://$PROJECT_DIR$/sum_textrank.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/textsum/data_convert_example.py">
+    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention_model.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention.py" />
+    <entry file="file://$PROJECT_DIR$/crawler/find_song.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
-          <caret line="17" column="45" lean-forward="true" selection-start-line="16" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data_filter.py">
+    <entry file="file://$PROJECT_DIR$/sum_textrank.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/data_convert_example.py" />
+    <entry file="file://$PROJECT_DIR$/data_filter.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/data_convert_example.py" />
+    <entry file="file://$PROJECT_DIR$/crawler/find_song.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="12" column="59" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="59" />
+        <state relative-caret-position="247">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/textsum/data_convert_example.py">
+    <entry file="file://$PROJECT_DIR$/sum_textrank.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention.py" />
+    <entry file="file://$PROJECT_DIR$/data_filter.py" />
+    <entry file="file://$PROJECT_DIR$/sum_textrank.py" />
+    <entry file="file://$PROJECT_DIR$/data_filter.py" />
+    <entry file="file://$PROJECT_DIR$/sum_textrank.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention_model.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/data_convert_example.py" />
+    <entry file="file://$PROJECT_DIR$/flask_demo/manage.py" />
+    <entry file="file://$PROJECT_DIR$/flask_demo/templates/index.html" />
+    <entry file="file://$PROJECT_DIR$/sum_textrank.py" />
+    <entry file="file://$PROJECT_DIR$/data_filter.py" />
+    <entry file="file://$PROJECT_DIR$/crawler/find_song.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="190">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data_filter.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention_model.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention.py" />
     <entry file="file://$PROJECT_DIR$/crawler/find_song.py" />
-    <entry file="file://$PROJECT_DIR$/sum_textrank.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4047">
-          <caret line="220" selection-start-line="220" selection-end-line="220" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data_filter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sum_textrank.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2869">
-          <caret line="155" column="25" selection-start-line="155" selection-start-column="25" selection-end-line="155" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data_filter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="12" column="59" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sum_textrank.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="18" column="14" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1007">
-          <caret line="60" selection-start-line="60" selection-end-line="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4389">
-          <caret line="236" selection-start-line="236" selection-end-line="237" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/textsum/data_convert_example.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="62" selection-start-line="62" selection-end-line="62" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/sum_textrank.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/data_convert_example.py" />
+    <entry file="file://$PROJECT_DIR$/data_filter.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention_model.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention.py" />
+    <entry file="file://$PROJECT_DIR$/crawler/find_song.py" />
+    <entry file="file://$PROJECT_DIR$/sum_textrank.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/data_convert_example.py" />
+    <entry file="file://$PROJECT_DIR$/data_filter.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/data_convert_example.py" />
+    <entry file="file://$PROJECT_DIR$/crawler/find_song.py" />
+    <entry file="file://$PROJECT_DIR$/sum_textrank.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention.py" />
+    <entry file="file://$PROJECT_DIR$/data_filter.py" />
+    <entry file="file://$PROJECT_DIR$/sum_textrank.py" />
+    <entry file="file://$PROJECT_DIR$/data_filter.py" />
+    <entry file="file://$PROJECT_DIR$/sum_textrank.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/seq2seq_attention_model.py" />
+    <entry file="file://$PROJECT_DIR$/textsum/data_convert_example.py" />
     <entry file="file://$PROJECT_DIR$/flask_demo/templates/test_audio.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -511,37 +426,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/flask_demo/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/crawler/find_song.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1102">
+          <caret line="60" column="26" selection-start-line="60" selection-start-column="26" selection-end-line="60" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/flask_demo/manage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="76">
+          <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/crawler/find_song.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flask_demo/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="30" column="25" lean-forward="true" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+        <state relative-caret-position="218">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="13" />
           <folding>
-            <element signature="n#style#0;n#textarea#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#form#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flask_demo/static/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
         </state>
       </provider>
     </entry>

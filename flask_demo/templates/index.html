@@ -21,7 +21,7 @@
             <a class="nav-link disabled" href="#">LIANBO has RAP</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="#">Demo</a>
+            <a class="nav-link active" href="{{ url_for('index') }}">Demo</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">About</a>
@@ -29,17 +29,20 @@
     </ul>
     <div id="content">
         <div class="row">
-            <div class="col-xs-8 col-sm-6">
+            <div class="col-xs-8 col-sm-6" id="step1">
                 STEP1: Enter news content
-                <textarea class="form-control" id="deblock_udid" name="deblock_udid" rows="8" style="min-width: 50%"></textarea>
+                <form name="news_form" method="POST">
+                    <textarea class="form-control" id="deblock_udid" name="news_content" rows="8" style="min-width: 50%"></textarea>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-4 col-sm-6">
-                STEP2: Get Your Rap Music！
+            <div class="col-xs-4 col-sm-6" id="step2">
+                STEP2: Get your Rap Music！
                 <div id="wrapper">
                     <audio preload="auto" controls>
-                        <source src="{{ url_for('static', filename='audio/BlueDucks_FourFlossFiveSix.mp3') }}">
+                        <source src="{{ url_for('static', filename='audio/' + message) }}">
                     </audio>
                     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
                     <script src="{{ url_for('static', filename='js/audioplayer.js') }}"></script>

@@ -9,4 +9,8 @@
     margin-top:30px;
 }
 
-margin:auto;
+#step1,#step2
+{
+    margin:auto;
+    padding-bottom:50px;
+}
