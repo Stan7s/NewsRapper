@@ -27,13 +27,13 @@ import data
 import seq2seq_attention_decode
 import seq2seq_attention_model
 
-mode_in = 'train'
+mode_in = 'decode'
 article_key_in = 'article'
 abstract_key_in = 'abstract'
 data_path_in = 'data/data'
 vocab_path_in = 'data/vocab'
-log_root_in = 'textsum/log_root'
-train_dir_in = 'textsum/log_root/train'
+log_root_in = 'log_root'
+train_dir_in = 'log_root/train'
 eval_dir_in = 'log_root/eval'
 decode_dir_in = 'log_root/decode'
 beam_size_in = 8
@@ -53,9 +53,9 @@ tf.app.flags.DEFINE_string('train_dir', train_dir_in, 'Directory for train.')
 tf.app.flags.DEFINE_string('eval_dir', eval_dir_in, 'Directory for eval.')
 tf.app.flags.DEFINE_string('decode_dir', decode_dir_in, 'Directory for decode summaries.')
 tf.app.flags.DEFINE_string('mode', mode_in, 'train/eval/decode mode')
-tf.app.flags.DEFINE_integer('max_run_steps', 10000000,
+tf.app.flags.DEFINE_integer('max_run_steps', 1000,
                             'Maximum number of run steps.')
-tf.app.flags.DEFINE_integer('max_article_sentences', 2,
+tf.app.flags.DEFINE_integer('max_article_sentences', 20,
                             'Max number of first sentences to use from the '
                             'article')
 tf.app.flags.DEFINE_integer('max_abstract_sentences', 100,

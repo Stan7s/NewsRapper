@@ -114,7 +114,7 @@ class SummaryTxt:
         for (sent_idx, score) in scored_sentences:
             if score > (avg + 0.5 * std):
                 summarySentences.append(sentences[sent_idx])
-                print sentences[sent_idx]
+                print(sentences[sent_idx])
         return summarySentences
 
     def summaryTopNtxt(self,text):
@@ -143,7 +143,7 @@ class SummaryTxt:
         top_n_scored = sorted(top_n_scored, key=lambda s: s[0])
         summarySentences = []
         for (idx, score) in top_n_scored:
-            print sentences[idx]
+            print(sentences[idx])
             summarySentences.append(sentences[idx])
 
         return sentences
@@ -167,9 +167,9 @@ if __name__=='__main__':
     # txt ='The information disclosed by the Film Funds Office of the State Administration of Press, Publication, Radio, Film and Television shows that, the total box office in China amounted to nearly 3 billion yuan during the first six days of the lunar year (February 8 - 13), an increase of 67% compared to the 1.797 billion yuan in the Chinese Spring Festival period in 2015, becoming the "Best Chinese Spring Festival Period in History".' \
     #      'During the Chinese Spring Festival period, "The Mermaid" contributed to a box office of 1.46 billion yuan. "The Man From Macau III" reached a box office of 680 million yuan. "The Journey to the West: The Monkey King 2" had a box office of 650 million yuan. "Kung Fu Panda 3" also had a box office of exceeding 130 million. These four blockbusters together contributed more than 95% of the total box office during the Chinese Spring Festival period.' \
     #      'There were many factors contributing to the popularity during the Chinese Spring Festival period. Apparently, the overall popular film market with good box office was driven by the emergence of a few blockbusters. In fact, apart from the appeal of the films, other factors like film ticket subsidy of online seat-selection companies, cinema channel sinking and the film-viewing heat in the middle and small cities driven by the home-returning wave were all main factors contributing to this blowout. A management of Shanghai Film Group told the 21st Century Business Herald.'
-    print txt
-    print "--"
+    print(txt)
+    print("--")
     obj.summaryScoredtxt(txt)
 
-    print "----"
+    print("----")
     obj.summaryTopNtxt(txt)
