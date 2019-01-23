@@ -9,5 +9,9 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/audio')
+def audio():
+    return render_template('test_audio.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

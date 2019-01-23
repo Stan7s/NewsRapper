@@ -9,7 +9,16 @@ ARTIST_LIST = [
     'an-quan-zhuo-lu',
     'j-sleeper-xing-gan-de-tuo-xie',
     'toy-wang-yi',
-    'xiong-di-ben-se'
+    'xiong-di-ben-se',
+    'shen-lan-er-tong',
+    'wu-hai-xiao',
+    'jony-j',
+    'hong-hua-hui',
+    "'3bangz3bangz",
+    'lil-jet',
+    'po8',
+    'higher-brothers',
+    'pg-one'
 ]
 def check_all_chinese(check_str):
     for ch in check_str:
@@ -37,7 +46,7 @@ def get_lyric_by_song_id(song_id):
     lyric = ""
     response = requests.get(url).text
     soup = bs4.BeautifulSoup(response, 'html.parser')
-    lyrics = 'lyrics_v1.2.txt'
+    lyrics = 'lyrics_v1.3.txt'
     with open(lyrics, 'a', encoding='UTF-8') as f:
         f.writelines("<song>\n")
         for i in soup.findAll(name='div', attrs={'class': 'css-8qbqv4'}):
