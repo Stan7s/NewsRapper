@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    audio_id = "default.mp3"  # 音频文件名
+    audio_id = "default.mp3"
     if request.method == 'POST':
         original_news = request.form['news_content']
         print(original_news)

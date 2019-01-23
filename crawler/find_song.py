@@ -42,13 +42,17 @@ def get_song_id_by_artist(artist):
 
 
 def get_lyric_by_song_id(song_id):
-    url = 'https://rapzh.com' + song_id
+    print(song_id)
+    url = 'https://rapzh.com/songs/' + song_id
     lyric = ""
     response = requests.get(url).text
+    if response.find("Not Found") > 0:
+        return
+    print("True")
     soup = bs4.BeautifulSoup(response, 'html.parser')
-    lyrics = 'lyrics_v1.3.txt'
+    lyrics = 'lyrics_v1.4.txt'
     with open(lyrics, 'a', encoding='UTF-8') as f:
-        f.writelines("<song>\n")
+        f.write("<song>\n")
         for i in soup.findAll(name='div', attrs={'class': 'css-8qbqv4'}):
             line = str(i.string)
             # print("【" + line + "】")
@@ -59,5 +63,5 @@ def get_lyric_by_song_id(song_id):
 
 
 if __name__ == '__main__':
-    for artist in ARTIST_LIST:
-        get_song_id_by_artist(artist)
+    for i in range(2430,2500):
+        get_lyric_by_song_id(str(i))
