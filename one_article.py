@@ -8,7 +8,7 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-resentencesp = re.compile('[ ,:，﹒﹔﹖﹗．；。！？"’”："‘“—]')
+resentencesp = re.compile('[ ,:·，﹒﹔﹖﹗．；。！？"’”："‘“—]')
 
 
 # https://zouhualong.oschina.io/pages/blog/python/Python-%E6%95%B0%E5%AD%97%E8%BD%AC%E6%B1%89%E5%AD%97
@@ -218,7 +218,7 @@ class Zh_Sent(object):
         return self.tone_list[-1][-1]
 
 
-# https://blog.csdn.net/XX_123_1_RJ/article/details/80718461
+# https://stackoverflow.com/questions/2460177/edit-distance-in-python
 def calc_edit_distance(s1, s2):
     '''
     计算s1和s2之间的编辑距离
@@ -226,19 +226,19 @@ def calc_edit_distance(s1, s2):
     :param s2:
     :return:
     '''
-    m, n = len(s1), len(s2)
-    if m == 0: return n
-    if n == 0: return m
-    dp = [[0] * (n + 1) for _ in range(m + 1)]  # 初始化dp和边界
-    for i in range(1, m + 1): dp[i][0] = i
-    for j in range(1, n + 1): dp[0][j] = j
-    for i in range(1, m + 1):  # 计算dp
-        for j in range(1, n + 1):
-            if s1[i - 1] == s2[j - 1]:
-                dp[i][j] = dp[i - 1][j - 1]
+    if len(s1) > len(s2):
+        s1, s2 = s2, s1
+
+    distances = range(len(s1) + 1)
+    for i2, c2 in enumerate(s2):
+        distances_ = [i2 + 1]
+        for i1, c1 in enumerate(s1):
+            if c1 == c2:
+                distances_.append(distances[i1])
             else:
-                dp[i][j] = min(dp[i - 1][j - 1] + 1, dp[i][j - 1] + 1, dp[i - 1][j] + 1)
-    return dp[m][n]
+                distances_.append(1 + min((distances[i1], distances[i1 + 1], distances_[-1])))
+        distances = distances_
+    return distances[-1]
 
 
 def compare_sentences(sentences):

@@ -17,7 +17,7 @@ def splitsentence(sentence):
             slist.append(i)
     return slist
 
-resentencesp2 = re.compile('[,.:，﹒﹔﹖﹗．；。！？"’”："‘“—]')
+resentencesp2 = re.compile('[ ,:·，﹒﹔﹖﹗．；。！？"’”："‘“—]')
 def splitsentence2(sentence):
     s = sentence
     slist = []
