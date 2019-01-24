@@ -63,5 +63,5 @@ def get_lyric_by_song_id(song_id):
 
 
 if __name__ == '__main__':
-    for i in range(2430,2500):
+    for i in range(2500,5000):
         get_lyric_by_song_id(str(i))
