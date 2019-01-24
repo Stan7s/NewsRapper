@@ -6,6 +6,7 @@ import librosa
 import numpy as np
 import jieba
 import os
+from gtts import gTTS,lang
 
 class RoboRap():
 
@@ -116,8 +117,11 @@ class RoboRap():
     #     sound.export("word2.wav", format = 'wav')
 
     def get_rap_sentence(self, sentence):
-        result  = self.client.synthesis(sentence, 'zh', 3, {'vol': 15, 'per':3, 'spd':5, 'pitch':5})
-        sound = AudioSegment.from_mp3(BytesIO(result))
+        #result  = self.client.synthesis(sentence, 'zh', 3, {'vol': 15, 'per':3, 'spd':5, 'pitch':5})
+        #sound = AudioSegment.from_mp3(BytesIO(result))
+        tts = gTTS(text=sentence, lang='zh-cn')#use decode to solve ascii error
+        tts.save("speech.mp3")
+        sound = AudioSegment.from_mp3("speech.mp3")
         return sound
 
 
