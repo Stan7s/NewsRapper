@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LIANBO has RAP</title>
+    <title>NewsRapper</title>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.js"></script>
@@ -15,10 +15,10 @@
 			(function(doc){var addEvent='addEventListener',type='gesturestart',qsa='querySelectorAll',scales=[1,1],meta=qsa in doc?doc[qsa]('meta[name=viewport]'):[];function fix(){meta.content='width=device-width,minimum-scale='+scales[0]+',maximum-scale='+scales[1];doc.removeEventListener(type,fix,true);}if((meta=meta[meta.length-1])&&addEvent in doc){fix();scales=[.25,1.6];doc[addEvent](type,fix,true);}}(document));
 		</script>
 </head>
-<body>
+<body style="background-image: url('static/img/texture3.jpg');">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link disabled" href="#">LIANBO has RAP</a>
+            <a class="nav-link disabled" href="#">NEWS RAPPER</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" href="{{ url_for('index') }}">Demo</a>

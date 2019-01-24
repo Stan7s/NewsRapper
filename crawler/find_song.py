@@ -50,7 +50,7 @@ def get_lyric_by_song_id(song_id):
         return
     print("True")
     soup = bs4.BeautifulSoup(response, 'html.parser')
-    lyrics = 'lyrics_v1.4.txt'
+    lyrics = 'lyrics_v2.0.txt'
     with open(lyrics, 'a', encoding='UTF-8') as f:
         f.write("<song>\n")
         for i in soup.findAll(name='div', attrs={'class': 'css-8qbqv4'}):
@@ -63,5 +63,5 @@ def get_lyric_by_song_id(song_id):
 
 
 if __name__ == '__main__':
-    for i in range(2500,5000):
+    for i in range(7128,9000):
         get_lyric_by_song_id(str(i))
