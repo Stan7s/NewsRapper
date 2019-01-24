@@ -80,6 +80,7 @@ class RoboRap():
         word_sounds = []
         for word in sentence:
             result  = self.client.synthesis(word, 'zh', 1, {'vol': 9, 'per':3, 'spd':1, 'pitch':9})
+            print(BytesIO(result))
             sound = AudioSegment.from_mp3(BytesIO(result))
             word_sounds.append(sound)
         silence = AudioSegment.silent(duration=self.SPB*500)
