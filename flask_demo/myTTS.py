@@ -15,10 +15,29 @@ class RoboRap():
         self._SECRET_KEY = '90ANCnFxOFFdaEGosFugbVCSxf4ZwH1W'
         self.client = AipSpeech(self._APP_ID, self._API_KEY, self._SECRET_KEY)
 
-        self.BPM = 160
+        self.BPM = 185  # = beat tempo * 2
         self.SPB = 60 / self.BPM
 
-        self.intro = 13.3
+        self.intro = 13.44435374
+        self.beat = "static/audio/beat.wav"
+
+    def text2rap_sentence(self, text, outputDir = os.getcwd()):
+        content = text.split("\n")
+        total_num = len(content)
+        rap_sounds = []
+        for i, sentence in enumerate(content):
+            # self.status_bar.setText('Rappify: {0}%'.format(100*i/total_num))
+            print('Rappify: {0}%'.format(100*i/total_num))
+            rap_sounds.append(self.get_rap_sentence(sentence))
+        rap = functools.reduce(lambda x, y: x+y, rap_sounds)
+        #add beats
+        intro_sec_segment = AudioSegment.silent(duration=self.intro*1000)  #duration in milliseconds
+        beat = AudioSegment.from_file(self.beat)
+        song = (intro_sec_segment + rap + intro_sec_segment).overlay(beat)
+        outputFile = outputDir + "/song.wav"
+        song.export(outputFile, format='wav')
+        print("save audio to " + outputFile)
+        return outputFile
 
     def get_rhythm(self, sentence):
         length = len(sentence)
@@ -60,26 +79,70 @@ class RoboRap():
         return rhythm_list[0]
 
     def text2rap(self, text, outputDir = os.getcwd()):
+        #beat tempo and times; onset detection
+        y, sr = librosa.load(self.beat)
+        tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
+        beat_times = librosa.frames_to_time(beat_frames, sr=sr)
+        self.setBPM = tempo * 2
+
+        #rapify sentences
         content = text.split("\n")
         total_num = len(content)
         rap_sounds = []
+
+        time_cnt = self.intro
+        time_cnt_idx = 0
+        sentence_silence_increment = 0
         for i, sentence in enumerate(content):
             # self.status_bar.setText('Rappify: {0}%'.format(100*i/total_num))
             print('Rappify: {0}%'.format(100*i/total_num))
-            rap_sounds.append(self.get_rap(sentence))
+            sentenceSound = self.get_rap_sentence(sentence)
+            # sentenceSound = self.get_rap_word(sentence)
+            time_cnt += sentenceSound.duration_seconds
+            #add silence to meet next nearest beat peak time
+            while(time_cnt_idx < len(beat_times)):
+                if beat_times[time_cnt_idx] > time_cnt:
+                    sentence_silence_increment = beat_times[time_cnt_idx] - time_cnt
+                    sentenceSound = sentenceSound + AudioSegment.silent(duration=sentence_silence_increment*1000)
+                    time_cnt = beat_times[time_cnt_idx]
+                    break
+                time_cnt_idx += 1
+            print(time_cnt_idx, time_cnt, beat_times[time_cnt_idx])
+            rap_sounds.append(sentenceSound)
+
+        #align sentences
         rap = functools.reduce(lambda x, y: x+y, rap_sounds)
+
         #add beats
         intro_sec_segment = AudioSegment.silent(duration=self.intro*1000)  #duration in milliseconds
-        beat = AudioSegment.from_file("static/audio/beat.wav")
-        song = (intro_sec_segment + rap).overlay(beat)
+        beat = AudioSegment.from_file(self.beat)
+        song = (intro_sec_segment + rap + intro_sec_segment).overlay(beat)
+        
+        #export
         outputFile = outputDir + "/song.wav"
         song.export(outputFile, format='wav')
+        print("save audio to " + outputFile)
+        
         return outputFile
 
-    def get_rap(self, sentence):
+    # def test_single_word(self):
+    #     result  = self.client.synthesis('重', 'zh', 3, {'vol': 15, 'per':3, 'spd':5, 'pitch':5})
+    #     sound = AudioSegment.from_mp3(BytesIO(result))
+    #     sound.export("word1.wav", format = 'wav')
+    #     result  = self.client.synthesis('庆', 'zh', 3, {'vol': 15, 'per':3, 'spd':5, 'pitch':5})
+    #     sound = AudioSegment.from_mp3(BytesIO(result))
+    #     sound.export("word2.wav", format = 'wav')
+
+    def get_rap_sentence(self, sentence):
+        result  = self.client.synthesis(sentence, 'zh', 3, {'vol': 15, 'per':3, 'spd':5, 'pitch':5})
+        sound = AudioSegment.from_mp3(BytesIO(result))
+        return sound
+
+
+    def get_rap_word(self, sentence):
         word_sounds = []
         for word in sentence:
-            result  = self.client.synthesis(word, 'zh', 1, {'vol': 9, 'per':3, 'spd':1, 'pitch':9})
+            result  = self.client.synthesis(word, 'zh', 3, {'vol': 15, 'per':3, 'spd':5, 'pitch':5})
             sound = AudioSegment.from_mp3(BytesIO(result))
             word_sounds.append(sound)
         silence = AudioSegment.silent(duration=self.SPB*500)
@@ -97,7 +160,6 @@ class RoboRap():
             if c == '-':
                 beat_sounds.append(silence)
         rap = functools.reduce(lambda x, y: x+y, beat_sounds)
-
         return rap
 
 
@@ -119,10 +181,13 @@ class RoboRap():
 
 
     def time_stretching(self, sound:AudioSegment, time_duration):
-
         sound.export('tmp.mp3', format='mp3')
         y, sr = librosa.load('tmp.mp3')
-        y_stretch = librosa.effects.time_stretch(y, sound.duration_seconds / time_duration)
+        #add trim
+        # y_stretch = librosa.effects.time_stretch(y, sound.duration_seconds / time_duration)
+        yt, index = librosa.effects.trim(y)
+        y_stretch = librosa.effects.time_stretch(yt, librosa.get_duration(yt) / time_duration)
+
         librosa.output.write_wav('tmp.wav', y_stretch, sr)
         new_sound = AudioSegment.from_wav('tmp.wav')
         return new_sound
