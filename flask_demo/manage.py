@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, flash, request, redirect, url_for, send_from_directory,session
 import textrank
 from myTTS import RoboRap
+from rappify_one_article import split_article
 
 
 app = Flask(__name__)
@@ -10,18 +11,26 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    audio_id = "default.mp3"
+    audio_path = "default.mp3"
+    lyric='-'
+    context = {'audio_path': audio_path, 'lyric': lyric}
     if request.method == 'POST':
         original_news = request.form['news_content']
         print(original_news)
         summary = textrank.summarize(original_news)
         print(summary)
-        lyric = summary
-        # lyric = generate_lyric(summary)
+        lyric = split_article(summary)
+        print(lyric)
+        lyric_str = ""
+        for line in lyric:
+            lyric_str += line + '\n'
+        print("Lyric:")
+        print(lyric_str)
         roborap = RoboRap()
-        outputFileFullPath = roborap.text2rap(lyric)
-        return render_template('index.html', message=audio_id)
-    return render_template('index.html', message=audio_id)
+        audio_path = roborap.text2rap(lyric)
+        context = {'audio_path': audio_path, 'lyric': lyric}
+        return render_template('index.html', **context)
+    return render_template('index.html', **context)
 
 
 @app.route('/audio')

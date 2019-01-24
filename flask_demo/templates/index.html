@@ -34,7 +34,11 @@
                 <form name="news_form" method="POST">
                     <textarea class="form-control" id="deblock_udid" name="news_content" rows="8" style="min-width: 50%"></textarea>
                     <div class="btn">
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <input type="radio" name="rap-type" value="rule-based">Rule-based RAP
+                        <input type="radio" name="rap-type" value="rule-based" style="margin-left:30px">Style-based RAP
+                    </div>
+                    <div class="btn">
+                        <button type="submit" class="btn btn-default" style="margin-left:30px; border:solid 1px">Submit</button>
                     </div>
                 </form>
             </div>
@@ -44,7 +48,7 @@
                 <h5 style="margin-bottom:40px">STEP2: Get your Rap Music！</h5>
                 <div id="wrapper">
                     <audio preload="auto" controls>
-                        <source src="{{ url_for('static', filename='audio/' + message) }}">
+                        <source src="{{ audio_path }}">
                     </audio>
                     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
                     <script src="{{ url_for('static', filename='js/audioplayer.js') }}"></script>
@@ -55,13 +59,8 @@
         <div>
             <h5>Lyrics</h5>
             <div id="lyric_content">
-                <p>重庆市委书记</p>
-                <p>他们结合实际</p>
-                <p>......</p>
-                <p>产城和生物湿地</p>
-                <p>是一个整体</p>
-                <p>景观等融为一体</p>
-                <p>在实际行动中形成一盘棋</p>
+                {% for line in lyric %}
+                    <p>{{ line }}</p>
 
             </div>
         </div>
