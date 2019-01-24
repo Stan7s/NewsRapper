@@ -95,9 +95,9 @@ class SummaryTxt:
 
         top_n_scored = sorted(scored_sentences, key=lambda s: s[1])[-self.TOP_SENTENCES:]
         top_n_scored = sorted(top_n_scored, key=lambda s: s[0])
-        summarySentences = []
+        summarySentences = ""
         for (idx, score) in top_n_scored:
-            summarySentences.append(sentences[idx])
+            summarySentences += sentences[idx]
         return summarySentences
 
 
@@ -112,8 +112,7 @@ def summarize(text):
     summary = obj.summaryTopNtxt(text)
     summary_path = 'static/text/summary.txt'
     with open(summary_path, 'w', encoding='utf-8') as f:
-        for sentence in summary:
-            f.write(sentence)
+        f.write(summary)
     return summary
 
 
