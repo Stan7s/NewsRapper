@@ -3,3 +3,5 @@ pypinyin
 jieba
 matplotlib
 numpy
+hanziconv
+thulac
