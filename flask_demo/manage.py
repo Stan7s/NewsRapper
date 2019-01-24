@@ -1,3 +1,4 @@
+# coding=utf-8
 import os
 from flask import Flask, render_template, flash, request, redirect, url_for, send_from_directory,session
 import textrank
