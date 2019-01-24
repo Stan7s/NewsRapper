@@ -80,7 +80,6 @@ args = parser.parse_args()
 with open(args.input, encoding="utf8") as f:
     article = f.read()
 seg_lines = split_article(args, article)
-print('\n'.join(seg_lines))
+print('\n'.join(seg_lines) + '\n')
 with open(args.output, encoding="utf8", mode='w') as f:
-    f.write('\n'.join(seg_lines))
-
+    f.write('\n'.join(seg_lines) + '\n')

@@ -41,6 +41,6 @@ args = parser.parse_args()
 with open(args.input, encoding="utf8") as f:
     lines = f.read().splitlines()
 lines = merge(lines)
-print('\n'.join(lines))
+print('\n'.join(lines) + '\n')
 with open(args.output, encoding="utf8", mode='w') as f:
-    f.write('\n'.join(lines))
+    f.write('\n'.join(lines) + '\n')
