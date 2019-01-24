@@ -18,19 +18,19 @@
 <body style="background-image: url('static/img/texture.jpg');">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link disabled" href="#">NEWS RAPPER</a>
+            <a class="nav-link disabled" href="#" style="color:rgba(255,255,255,0.5)">NEWS RAPPER</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="{{ url_for('index') }}">Demo</a>
+            <a class="nav-link active" href="{{ url_for('index') }}" style="color:rgba(255,255,255,0.9)">Demo</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="#" style="color:rgba(255,255,255,0.9)">About</a>
         </li>
     </ul>
     <div id="content">
         <div class="row">
             <div class="col-xs-8 col-sm-6" id="step1">
-                <h5>STEP1: Enter news content</h5>
+                <h5 style="margin-top:40px;margin-bottom:40px">STEP1: Enter news content</h5>
                 <form name="news_form" method="POST">
                     <textarea class="form-control" id="deblock_udid" name="news_content" rows="8" style="min-width: 50%"></textarea>
                     <div class="btn">
@@ -41,7 +41,7 @@
         </div>
         <div class="row">
             <div class="col-xs-4 col-sm-6" id="step2">
-                <h5>STEP2: Get your Rap Music！</h5>
+                <h5 style="margin-bottom:40px">STEP2: Get your Rap Music！</h5>
                 <div id="wrapper">
                     <audio preload="auto" controls>
                         <source src="{{ url_for('static', filename='audio/' + message) }}">

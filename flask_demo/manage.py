@@ -1,6 +1,8 @@
+# coding=utf-8
 import os
 from flask import Flask, render_template, flash, request, redirect, url_for, send_from_directory,session
 import textrank
+from myTTS import RoboRap
 
 
 app = Flask(__name__)
@@ -14,8 +16,10 @@ def index():
         print(original_news)
         summary = textrank.summarize(original_news)
         print(summary)
+        lyric = summary
         # lyric = generate_lyric(summary)
-        # audio_id = generate_audio(lyric)
+        roborap = RoboRap()
+        outputFileFullPath = roborap.text2rap(lyric)
         return render_template('index.html', message=audio_id)
     return render_template('index.html', message=audio_id)
 
