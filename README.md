@@ -1,2 +1,2 @@
-# Lianbo2Rap
+# NewsRapper
 Google ML WinCamp Project
