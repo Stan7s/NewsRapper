@@ -5,6 +5,7 @@ import jieba
 import pypinyin
 import numpy as np
 import matplotlib.pyplot as plt
+import thulac
 from utils import *
 
 
@@ -189,35 +190,23 @@ def split_article(article):
     print('分句总数：', len(slist))
 
     sentences = []
+    thu1 = thulac.thulac(seg_only=True)
     for s in slist:
         s = s.strip()
         if len(s) == 0:  # patch for empty
             continue
         if len(s) < 5:  # 删除词数太少的句子
             continue
-        seg_list = jieba.lcut(s)  # list cut
+        # 分词
+        seg_list = thu1.cut(s)
+        seg_list = [t[0] for t in seg_list]
+        # seg_list = jieba.lcut(s)  # list cut
         if len(seg_list) == 0:  # patch for empty
             continue
         seg_list2 = []
         # 筛掉\n之类奇怪的东西，同时去掉标点符号
         for word in seg_list:
-            if word == '\n' or word == '《' or word == '》':
-                continue
-            if is_number(word):
-                # print(word)
-                word = float2cn(word)  # queer fix
-            if word[-1] == '%' and is_number(word[:-1]):
-                seg_list2.append('百分之')
-                word = float2cn(word[:-1])  # queer fix
-            if word == '+':
-                word = '加'
-            if word in '、《》（）()':  # 删除标点
-                continue
-            if is_alpha(word):  # temp fix
-                # print('判断为英文：', word)
-                # word = '英文'
-                pass
-            seg_list2.append(word)
+            seg_list2 += parse_segged_word(word, tokenize=False)
         if len(seg_list2) == 0:  # patch for empty
             continue
         pinyin_list = []

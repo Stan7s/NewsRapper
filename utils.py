@@ -38,14 +38,29 @@ def is_number(s):
     except ValueError:
         pass
 
+    # try:
+    #     import unicodedata
+    #     unicodedata.numeric(s)
+    #     return True
+    # except (TypeError, ValueError):
+    #     pass
+    #
+    # return False
+
+
+def to_number(s):
     try:
-        import unicodedata
-        unicodedata.numeric(s)
-        return True
-    except (TypeError, ValueError):
+        f = float(s)
+        return f
+    except ValueError:
         pass
 
-    return False
+    try:
+        import unicodedata
+        f = unicodedata.numeric(s)
+        return f
+    except (TypeError, ValueError):
+        pass
 
 
 # https://leowood.github.io/2018/05/19/Python3%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%AD%E8%8B%B1%E6%96%87%E6%95%B0%E5%AD%97%E7%AC%A6%E5%8F%B7/
@@ -92,7 +107,7 @@ def ishan(text):
     return all('\u4e00' <= char <= '\u9fff' for char in text)
 
 
-def parse_segged_word(word):
+def parse_segged_word(word, tokenize=True):
     if not word:
         return []
     if word == '\n' or word == '《' or word == '》' or word == '/' or word == '\\':
@@ -100,9 +115,15 @@ def parse_segged_word(word):
     if is_alpha(word):  # temp fix
         return []
     if is_number(word):
-        return ['<num>']
+        if tokenize:
+            return ['<num>']
+        else:
+            return [float2cn(word)]
     elif word[-1] == '%' and is_number(word[:-1]):
-        return ['百分之', '<num>']
+        if tokenize:
+            return ['百分之', float2cn(word)]
+        else:
+            return ['百分之', '<num>']
     elif word == '+':
         return ['加']
     elif word in '、《》（）() ﹒﹔﹖﹗．；。！？"’”」』"‘“「『@ 　,:·\\/，﹒﹔﹖﹗．；。！？’”："‘“—':  # 删除标点
@@ -231,4 +252,6 @@ def float2cn(number, traditional=False):
     f = f - i
     while math.fabs(f - int(f + 0.5)) >= 1e-9:
         f = f * 10
+    if abs(f) <= 1e-6:
+        return pre + num2cn(i, traditional)
     return pre + num2cn(i, traditional) + '点' + num2cn(int(f + 0.5), traditional, True)
