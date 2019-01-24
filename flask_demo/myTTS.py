@@ -21,24 +21,6 @@ class RoboRap():
         self.intro = 13.44435374
         self.beat = "static/audio/beat.wav"
 
-    def text2rap_sentence(self, text, outputDir = os.getcwd()):
-        content = text.split("\n")
-        total_num = len(content)
-        rap_sounds = []
-        for i, sentence in enumerate(content):
-            # self.status_bar.setText('Rappify: {0}%'.format(100*i/total_num))
-            print('Rappify: {0}%'.format(100*i/total_num))
-            rap_sounds.append(self.get_rap_sentence(sentence))
-        rap = functools.reduce(lambda x, y: x+y, rap_sounds)
-        #add beats
-        intro_sec_segment = AudioSegment.silent(duration=self.intro*1000)  #duration in milliseconds
-        beat = AudioSegment.from_file(self.beat)
-        song = (intro_sec_segment + rap + intro_sec_segment).overlay(beat)
-        outputFile = outputDir + "/song.wav"
-        song.export(outputFile, format='wav')
-        print("save audio to " + outputFile)
-        return outputFile
-
     def get_rhythm(self, sentence):
         length = len(sentence)
 
@@ -142,10 +124,10 @@ class RoboRap():
     def get_rap_word(self, sentence):
         word_sounds = []
         for word in sentence:
-            result  = self.client.synthesis(word, 'zh', 3, {'vol': 15, 'per':3, 'spd':5, 'pitch':5})
+            result  = self.client.synthesis(word, 'zh', 3, {'vol': 15, 'per':3, 'spd':1, 'pitch':5})
             sound = AudioSegment.from_mp3(BytesIO(result))
             word_sounds.append(sound)
-        silence = AudioSegment.silent(duration=self.SPB*500)
+        silence = AudioSegment.silent(duration=self.SPB*1000)
 
         rhythm = self.get_rhythm(sentence)
         i = 0
