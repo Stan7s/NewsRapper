@@ -2,127 +2,70 @@
 
 import argparse
 import jieba
-import re
+import thulac
 import pandas as pd
 import numpy as np
 
-
-# https://github.com/fxsjy/jieba/issues/575
-resentencesp = re.compile('([\n﹒﹔﹖﹗．；。！？]["’”」』]{0,2}|：(?=["‘“「『]{1,2}|$))')
-def splitsentence(sentence):
-    s = sentence
-    slist = []
-    # print(s)
-    for i in resentencesp.split(s):
-        if resentencesp.match(i) and slist:
-            slist[-1] += i
-        elif i:
-            slist.append(i)
-    return slist
-
-resentencesp2 = re.compile('[ 　,:·，﹒﹔﹖﹗．；。！？"’”："‘“—]')
-def splitsentence2(sentence):
-    s = sentence
-    slist = []
-    # print(s)
-    for i in resentencesp2.split(s):
-        if resentencesp2.match(i) and slist:
-            slist[-1] += i
-        elif i:
-            slist.append(i)
-    return slist
-
-
-# http://www.runoob.com/python3/python3-check-is-number.html
-def is_number(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        pass
-
-    try:
-        import unicodedata
-        unicodedata.numeric(s)
-        return True
-    except (TypeError, ValueError):
-        pass
-
-    return False
-
-
-# https://leowood.github.io/2018/05/19/Python3%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%AD%E8%8B%B1%E6%96%87%E6%95%B0%E5%AD%97%E7%AC%A6%E5%8F%B7/
-def is_alphabet(char):
-    '''
-    判断字符是否为英文字母
-    :param char:
-    :return:
-    '''
-    if (char >= '\u0041' and char <= '\u005a') or (char >= '\u0061' and char <= '\u007a'):
-        return True
-    else:
-        return False
-
-
-def is_alpha(s):
-    '''
-    判断字符串是否只包含英文字母
-    :param s:
-    :return:
-    '''
-    for ch in s:
-        if not is_alphabet(ch):
-            return False
-    return True
-
+from utils import *
 
 def main(args):
-    with open(args.input, encoding='utf8') as f:
-        news_list = f.read().split('<news>')
+    news_list = []
+    if args.format == 'custom':
+        with open(args.input, encoding='utf8') as f:
+            news_list = f.read().split('<news>')
+    if args.format == 'csv':
+        news_list = read_from_csv(args.input, 200)
     with open(args.output, encoding='utf8', mode='w') as f:
-        sent_list = []
         n = len(news_list)
-        chosen = np.random.choice(n, 100)
         # 随机选100篇好了。。
-        for i in range(len(chosen)):
-            news = news_list[chosen[i]]
-            if i % 10 == 0:
-                print("%d/%d" % (i, len(chosen)))
+        # 为了稳定性不随机选……
+        cnt = 0
+        thu1 = thulac.thulac(seg_only=True)
+        for i in range(n):
+            if cnt > args.threshold:
+                break
+            news = news_list[i]
+            if i % 100 == 0:
+                print("%d/%d" % (cnt, args.threshold))
             if len(news) > 0:
-                sent_list += splitsentence2(news)
+                sent_list = splitsentence2(news)
                 parsed_list = []
                 for sent in sent_list:
                     sent = sent.strip()
                     if len(sent) == 0:
                         continue
-                    seg_list = jieba.lcut(sent)
+                    # 分词
+                    if args.segment == 0:
+                        seg_list = jieba.lcut(sent)
+                    else:
+                        seg_list = thu1.cut(sent)
+                        seg_list = [t[0] for t in seg_list]
                     seg_list2 = []
                     for word in seg_list:
-                        if word == '\n' or word == '《' or word == '》':
-                            continue
-                        if is_number(word):
-                            word = '<num>'
-                        if word[-1] == '%' and is_number(word[:-1]):
-                            seg_list2.append('百分之')
-                            word = '<num>'
-                        if word == '+':
-                            word = '加'
-                        if word in '、《》（）()':  # 删除标点
-                            continue
-                        if is_alpha(word):  # temp fix
-                            continue
-                        seg_list2.append(word)
-                    parsed_list.append(seg_list2)
+                        seg_list2 += parse_segged_word(word)
+                    # 不分词
+                    if args.segment == 0:
+                        seg_list3 = []
+                        for word in seg_list2:
+                            if word == '<num>':
+                                seg_list3.append(word)
+                            else:
+                                seg_list3 += list(word)
+                        seg_list2 = seg_list3
+                    if len(seg_list2) > 0:
+                        parsed_list.append(seg_list2)
 
+                # 取maxlen长度的句子
                 n = len(parsed_list)
                 l = -1
                 line = []
                 for i in range(n + 1):
-                    if i == n or l + 1 + len(parsed_list[i]) > 15:
+                    if i == n or l + 1 + len(parsed_list[i]) > args.maxlen:
                         if l <= 0:
                             continue
-                        if len(line) <= 15:
+                        if len(line) <= args.maxlen:
                             f.write(' '.join(line) + '\n')
+                            cnt += 1
                         l = -1
                         line = []
                         if i == n:
@@ -138,6 +81,10 @@ def main(args):
 
 parser = argparse.ArgumentParser(description='Process a document')
 parser.add_argument('--input', type=str, default='data/long_news.txt', help='input news file name')
-parser.add_argument('--output', type=str, default='output/parsed_news.txt', help='output file name')
+parser.add_argument('--output', type=str, default='output/seg_news.txt', help='output file name')
+parser.add_argument('--format', type=str, default='csv')
+parser.add_argument('--segment', type=int, default=1)
+parser.add_argument('--maxlen', type=int, default=15)
+parser.add_argument('--threshold', type=int, default=200000)
 args = parser.parse_args()
 main(args)

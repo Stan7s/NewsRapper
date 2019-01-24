@@ -1,0 +1,1 @@
+Training data without segmentation. (Take Chinese char as segmentation.)
