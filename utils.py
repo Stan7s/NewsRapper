@@ -88,8 +88,8 @@ def is_alpha(s):
     return True
 
 
-def read_from_csv(filename, threshold=0):
-    df = pd.read_csv('data/chinese_news.csv')
+def read_from_csv(filename='data/chinese_news.csv', threshold=0):
+    df = pd.read_csv(filename)
     news_list = []
     for row in df.itertuples():
         # print(row)
