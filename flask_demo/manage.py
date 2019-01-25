@@ -27,7 +27,7 @@ def index():
         print("Lyric:")
         print(lyric_str)
         roborap = RoboRap()
-        audio_path = roborap.text2rap(lyric)
+        audio_path = roborap.text2rap(lyric_str)
         context = {'audio_path': audio_path, 'lyric': lyric}
         return render_template('index.html', **context)
     return render_template('index.html', **context)
@@ -39,4 +39,4 @@ def audio():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=80)

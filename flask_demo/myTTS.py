@@ -61,7 +61,7 @@ class RoboRap():
 
         return rhythm_list[0]
 
-    def text2rap(self, text, outputDir = os.getcwd()):
+    def text2rap(self, text, outputDir = "static/audio/"):
         #beat tempo and times; onset detection
         y, sr = librosa.load(self.beat)
         tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
@@ -77,6 +77,8 @@ class RoboRap():
         time_cnt_idx = 0
         sentence_silence_increment = 0
         for i, sentence in enumerate(content):
+            if sentence == '':
+                continue
             # self.status_bar.setText('Rappify: {0}%'.format(100*i/total_num))
             print('Rappify: {0}%'.format(100*i/total_num))
             sentenceSound = self.get_rap_sentence(sentence)
@@ -106,7 +108,7 @@ class RoboRap():
         song.export(outputFile, format='wav')
         print("save audio to " + outputFile)
         
-        return outputFile
+        return "song.wav"
 
     # def test_single_word(self):
     #     result  = self.client.synthesis('重', 'zh', 3, {'vol': 15, 'per':3, 'spd':5, 'pitch':5})
