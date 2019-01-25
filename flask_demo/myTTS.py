@@ -61,7 +61,7 @@ class RoboRap():
 
         return rhythm_list[0]
 
-    def text2rap(self, text, outputDir = os.getcwd()):
+    def text2rap(self, text, outputDir = "static/audio/"):
         #beat tempo and times; onset detection
         y, sr = librosa.load(self.beat)
         tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
