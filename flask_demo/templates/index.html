@@ -32,7 +32,7 @@
             <div class="col-xs-8 col-sm-6" id="step1">
                 <h5 style="margin-top:40px;margin-bottom:40px">STEP1: Enter news content</h5>
                 <form name="news_form" method="POST">
-                    <textarea class="form-control" id="deblock_udid" name="news_content" rows="8" style="min-width: 50%">中共中央总书记、国家主席、中央军委主席习近平5日在重庆召开推动长江经济带发展座谈会，听取有关省市和国务院有关部门对推动长江经济带发展的意见和建议。他强调，长江是中华民族的母亲河，也是中华民族发展的重要支撑。推动长江经济带发展必须从中华民族长远利益考虑，走生态优先、绿色发展之路，使绿水青山产生巨大生态效益、经济效益、社会效益，使母亲河永葆生机活力。
+                    <textarea class="form-control" id="deblock_udid" name="news_content" rows="8" style="min-width: 50%">   中共中央总书记、国家主席、中央军委主席习近平5日在重庆召开推动长江经济带发展座谈会，听取有关省市和国务院有关部门对推动长江经济带发展的意见和建议。他强调，长江是中华民族的母亲河，也是中华民族发展的重要支撑。推动长江经济带发展必须从中华民族长远利益考虑，走生态优先、绿色发展之路，使绿水青山产生巨大生态效益、经济效益、社会效益，使母亲河永葆生机活力。
 		中共中央政治局常委、国务院副总理、推动长江经济带发展领导小组组长张高丽出席座谈会并讲话。
     习近平在重庆调研期间召开这次座谈会，就推动长江经济带发展听取上海、江苏、浙江、安徽、江西、湖北、湖南、重庆、四川、贵州、云南党委主要负责同志和国务院有关部门负责同志的意见和建议。座谈会上，重庆市委书记孙政才、上海市委书记韩正、湖北省委书记李鸿忠、国家发展改革委主任徐绍史、环境保护部部长陈吉宁等5位同志发言。他们结合实际，从不同角度就推动长江经济带发展有关问题谈了认识和看法。习近平边听边记，不时同他们讨论交流。在听取大家发言后，习近平发表重要讲话。
 习近平指出，推动长江经济带发展是国家一项重大区域发展战略。这一战略提出以来，推动长江经济带发展领导小组、国务院有关部门和沿江省市做了大量工作，在整治航道、利用水资源、控制和治理沿江污染、推动通关和检验检疫一体化等方面取得积极成效，一批重大工程建设顺利推进。这些工作值得肯定。
@@ -58,12 +58,20 @@
                 <h5 style="margin-bottom:40px">STEP2: Get your Rap Music！</h5>
                 <div id="wrapper">
                     <audio preload="auto" controls>
-			<source src="{{ url_for('static', filename='audio/'+audio_path) }}">
+			             <source src="{{ url_for('static', filename='audio/'+audio_path) }}">
                     </audio>
+                    
                     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
                     <script src="{{ url_for('static', filename='js/audioplayer.js') }}"></script>
                     <script>$( function() { $( 'audio' ).audioPlayer(); } );</script>
                 </div>
+                <h5 style="margin-bottom:40px">Try me</h5>
+                <div>
+                    <audio preload="auto" controls>
+                         <source src="{{ url_for('static', filename='audio/song_demo.wav') }}">
+                    </audio>
+                </div>
+
             </div>
         </div>
         <div>
@@ -71,7 +79,7 @@
             <div id="lyric_content">
                 {% for line in lyric %}
                     <p>{{ line }}</p>
-		{% endfor%}
+                {% endfor%}
             </div>
         </div>
     </div>
